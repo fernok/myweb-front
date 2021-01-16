@@ -5,4 +5,5 @@ The project utilizes
 * React.js
 * Node.js
 * PostgreSQL
+
 But this is the front-end of the project and only contains the React.js part.
