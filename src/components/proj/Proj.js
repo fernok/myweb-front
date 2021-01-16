@@ -9,7 +9,7 @@ const Proj = ({match}) => {
         <>
             <Route path={`${match.url}/:id`} component={Read} />
             <Route path={`${match.url}/edit/:id`} component={Edit}/>
-            <Route path={`${match.url}/delete/:id`} component={Delete}/>
+            {/* <Route path={`${match.url}/delete/:id`} component={Delete}/> */}
         </>
     )
 };

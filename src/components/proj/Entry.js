@@ -5,7 +5,9 @@ class DocumentBody extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {contents: ""};
+        this.state = {
+            contents: "",
+        };
     }
     
     async getDocument() {
@@ -18,9 +20,13 @@ class DocumentBody extends React.Component {
     
         const data = await response.json();
 
-        if (!data.success) console.log(data);
+        console.log(data);
 
-        this.setState({contents: data.contents});
+        this.setState({
+            contents: data.contents
+        });
+
+        this.props.onDataFetch(data.title);
     }
 
     componentDidMount() {
@@ -40,12 +46,17 @@ class Read extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {title: ""};
         this.handleScroll = this.handleScroll.bind(this);
     }
 
     handleScroll = () => {
         var header = document.querySelector("header");
         header.classList.toggle("sticky", window.scrollY > 0);
+    }
+
+    handleTitleChange = (title) => {
+        this.setState({title: title});
     }
 
     componentDidMount() {
@@ -60,11 +71,11 @@ class Read extends React.Component {
         return (
             <div className="proj-mainframe">
                 <header className="proj-sub-title" onScroll={this.handleScroll}>
-                    <div><span>Title</span></div>
+                    <div><span>{this.state.title}</span></div>
                 </header>
                 <div className="proj-sur-body">
                     <div className="proj-vertical-fill">
-                        <DocumentBody id={this.props.match.params.id}/>
+                        <DocumentBody id={this.props.match.params.id} onDataFetch={this.handleTitleChange}/>
                     </div>
                 </div>
             </div>

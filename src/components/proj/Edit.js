@@ -49,7 +49,10 @@ class DocumentBody extends React.Component {
         return (
             this.state.isUpdated ? 
             <Redirect to={targetUrl}/>
-            : <div>Hello, world!</div>
+            : <form>
+                <input type="textarea"></input>
+                <button onClick={this.updateDocument}>Edit</button>
+            </form>
         )
     }
 }
