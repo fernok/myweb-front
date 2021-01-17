@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Read from './Entry';
+import Read from './Read';
 import Edit from './Edit';
 import Delete from './Delete';
 
