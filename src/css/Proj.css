@@ -73,3 +73,64 @@ header.sticky div span {
 }
 
 /* =================================== */
+
+.proj-edit-mainframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: floralwhite;
+}
+
+.proj-edit-sur-body {
+    width: 100%;
+}
+
+.proj-edit-title-sur {
+    margin: 10px 10px;
+}
+.proj-edit-title-input {
+    padding: 1px 0;
+    width: calc(100% - 4px);
+
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+.proj-edit-desc-sur {
+    margin: 10px 10px;
+}
+.proj-edit-desc-input {
+    padding: 1px 0;
+    width: calc(100% - 4px);
+
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+.proj-edit-sur {
+    width: calc(100% - 20px);
+    margin: 0px 10px 10px 10px;
+    display: flex;
+}
+
+.proj-edit-textarea {
+    width: 40%;
+    height: 70vh;
+    resize: none;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.proj-edit-markdown {
+    width: 60%;
+    height: 70vh;
+    padding: 10px;
+    outline: none;
+    overflow-y: scroll;
+}
+
+.proj-edit-button-sur {
+    margin: 10px;
+}

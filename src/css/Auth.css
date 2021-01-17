@@ -1,5 +1,6 @@
 .mainframe {
-    background-color: burlywood;
+    /* background-color: burlywood; */
+    background-image: radial-gradient(circle, #ffecc5, #f9e2b9, #f2d9ad, #eccfa1, #e6c596, #d9b58b, #cca581, #bf9677, #a57e6b, #89685e, #6d5451, #504141);
 }
 
 .sur-signin {
