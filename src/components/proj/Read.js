@@ -68,10 +68,11 @@ class Read extends React.Component {
     }
 
     render() {
+        const targetUrl = '/p/edit/' + this.props.match.params.id.toString();
         return (
             <div className="proj-mainframe">
                 <header className="proj-sub-title" onScroll={this.handleScroll}>
-                    <div><span>{this.state.title}</span></div>
+                    <div><span className="proj-title-span">{this.state.title}</span><span className="proj-edit-button"><a href={targetUrl}> edit</a></span></div>
                 </header>
                 <div className="proj-sur-body">
                     <div className="proj-vertical-fill">
