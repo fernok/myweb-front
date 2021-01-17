@@ -44,8 +44,8 @@ header.sticky {
 header.sticky .proj-title-span {
     color: rgb(40,23,23);
 }
-header.sticky .proj-edit-button {
-    display: none;
+header.sticky .proj-edit-button a {
+    color: rgb(40,23,23);
 }
 
 .proj-edit-button {
