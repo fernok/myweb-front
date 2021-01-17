@@ -65,7 +65,6 @@ header.sticky .proj-edit-button a {
 }
 
 .proj-vertical-fill {
-    display: flex;
     width: 698px;
     height: 100%;
     margin: 0 auto;

@@ -31,7 +31,7 @@ class EditingWindow extends React.Component {
     render() {
         return (
             <div className="proj-edit-sur">
-            <textarea className="proj-edit-textarea" value={this.state.input} onChange={(e) => this.handleChange(e)}></textarea>
+            <textarea className="proj-edit-textarea" value={this.props.defaultContents} onChange={(e) => this.handleChange(e)}></textarea>
             <ReactMarkdown 
                 className="proj-edit-markdown" 
                 children={this.state.input}
@@ -52,7 +52,9 @@ class Form extends React.Component {
         this.state = {
             title: "",
             description: "",
-            contents: ""
+            contents: "",
+            userDidSubmit: false,
+            editDidSuccess: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -79,7 +81,35 @@ class Form extends React.Component {
     }
 
     handleSubmit = async e => {
-        console.log(this.state);
+        // console.log(this.state);
+        e.preventDefault();
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: this.props.id, 
+                title: this.state.title,
+                description: this.state.description,
+                contents: this.state.contents
+            }),
+            credentials: 'include'
+        };
+        const response = await fetch('/proj/edit', requestOptions);
+
+        const data = await response.json();
+
+        if (data.success) {
+            this.setState({
+                userDidSubmit: true,
+                editDidSuccess: true,
+            })
+        } else {
+            this.setState({
+                userDidSubmit: true,
+                editDidSuccess: false,
+            })
+        }
     }
 
     componentDidMount() {
@@ -87,8 +117,13 @@ class Form extends React.Component {
     }
 
     render() {
+        const successUrl = '/p/' + this.props.id.toString();
         return (
-            <form onSubmit={this.handleSubmit}>
+            this.state.userDidSubmit ? 
+            (this.state.editDidSuccess ? 
+                <Redirect to={successUrl} />
+                : <Redirect to='/auth/signin' />)
+            : <form onSubmit={this.handleSubmit}>
                 <div className="proj-edit-title-sur"><input 
                     className="proj-edit-title-input" 
                     type="text" 
@@ -99,9 +134,9 @@ class Form extends React.Component {
                     className="proj-edit-desc-input" 
                     type="text" 
                     value={this.state.description}
-                    onChange={(e)=>this.setState({desc: e.target.value})}
+                    onChange={(e)=>this.setState({description: e.target.value})}
                 /></div>
-                <EditingWindow onMDEdit={this.handleMDChange}/>
+                <EditingWindow defaultContents={this.state.contents} onMDEdit={this.handleMDChange}/>
                 <div className="proj-edit-button-sur">
                     <button className="proj-edit-submit-button" type="submit">Edit!</button>
                 </div>
@@ -110,45 +145,13 @@ class Form extends React.Component {
     }
 }
 
-class DocumentBody extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isUpdated: false,
-        };
-    }
-
-    async updateDocument() {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({id: this.props.id, contents: this.state.contents}),
-        };
-        const response = await fetch('/proj/edit', requestOptions);
-
-        const data = await response.json();
-
-        if (data.success) this.setState({isUpdated: true});
-    }
-
-    render() {
-        const targetUrl = '/p/' + this.props.id.toString();
-        return (
-            this.state.isUpdated ? 
-            <Redirect to={targetUrl}/> 
-            : <Form id={this.props.id}/>
-        )
-    }
-}
 
 class Edit extends React.Component {
     render() {
         return (
             <div className="proj-edit-mainframe">
                 <div className="proj-edit-sur-body">
-                        <DocumentBody id={this.props.match.params.id}/>
-                        {/* <EditingWindow /> */}
+                    <Form id={this.props.match.params.id}/>
                 </div>
             </div>
         )

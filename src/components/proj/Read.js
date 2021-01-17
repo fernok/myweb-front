@@ -1,5 +1,35 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
+
+import { Prism as SyntaxHighLighter } from 'react-syntax-highlighter';
+import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import gfm from 'remark-gfm';
+
 import '../../css/Proj.css';
+
+const Component = ({ value, language }) => {
+    return (
+        <SyntaxHighLighter language={ language ?? null } style={ prism }>
+            { value ?? "" }
+        </SyntaxHighLighter>
+    )
+}
+
+class MarkDownWindow extends React.Component {
+    render() {
+        return (
+            <>
+                <ReactMarkdown
+                    children={this.props.contents}
+                    renderers={{
+                        code:Component,
+                    }}
+                    plugins={[gfm]}
+                />
+            </>
+        )
+    }
+}
 
 class DocumentBody extends React.Component {
     constructor(props) {
@@ -36,7 +66,8 @@ class DocumentBody extends React.Component {
     render() {
         return (
             <>
-                {this.state.contents}
+                {/* {this.state.contents} */}
+                <MarkDownWindow contents={this.state.contents} />
             </>
         )
     }
