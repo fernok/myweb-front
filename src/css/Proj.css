@@ -44,14 +44,15 @@ header.sticky {
 header.sticky .proj-title-span {
     color: rgb(40,23,23);
 }
-header.sticky .proj-edit-button a {
+header.sticky .proj-nav-button a {
     color: rgb(40,23,23);
 }
 
-.proj-edit-button {
+.proj-nav-button {
     float: right;
 }
-.proj-edit-button a {
+.proj-nav-button a {
+    margin-left: 20px;
     color: floralwhite;
     text-decoration: none;
 }

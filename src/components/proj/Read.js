@@ -103,7 +103,13 @@ class Read extends React.Component {
         return (
             <div className="proj-mainframe">
                 <header className="proj-sub-title" onScroll={this.handleScroll}>
-                    <div><span className="proj-title-span">{this.state.title}</span><span className="proj-edit-button"><a href={targetUrl}>edit</a></span></div>
+                    <div>
+                        <span className="proj-title-span">{this.state.title}</span>
+                        <span className="proj-nav-button">
+                            <a href='/'>home</a>
+                            <a href={targetUrl}>edit</a>
+                        </span>
+                    </div>
                 </header>
                 <div className="proj-sur-body">
                     <div className="proj-vertical-fill">
