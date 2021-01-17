@@ -35,6 +35,7 @@ header {
     align-self: flex-end;
     text-transform: uppercase;
     color: floralwhite;
+    font-size: 43px;
 }
 header.sticky {
     height: 64px;
