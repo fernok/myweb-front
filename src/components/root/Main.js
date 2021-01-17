@@ -2,23 +2,6 @@ import '../../css/Main.css';
 import React from 'react';
 import { About, Project, Research, Course, Contact, BlankFill } from './Content.js';
 
-// const returnStyle = (menu) => {
-//     switch (menu) {
-//         case "ABOUTME":
-//             return [1, <About />];
-//         case "PROJECT":
-//             return [2, <Project />];
-//         case "RESEARCH":
-//             return [3, <Research />];
-//         case "COURSE":
-//             return [4, <Course />];
-//         case "CONTACT":
-//             return [5, <Contact />];
-//         default:
-//             break;
-//     }
-// }
-
 class Title extends React.Component {
     render () {
         const title = this.props.title === "ABOUTME" ? "ABOUT ME" : this.props.title;

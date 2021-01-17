@@ -68,15 +68,19 @@
     margin: 0 auto;
 }
 
-/* @media screen and (max-width: 774px) {
-    .righthalf-bottom {
-        display: block;
-    }
-    .righthalf-right {
-        display: none;
-    }
-} */
-
+#contents-contact-img {
+    vertical-align: middle;
+    margin-right: 18px;
+}
+.contents-contact-sur-img-div {
+    width: 40%;
+    margin: 0 auto;
+    padding-top: 10px;
+    font-weight: bolder;
+}
+.contents-contact-sur-img-div div {
+    padding: 4px 0;
+}
 
 @media screen and (max-width: 768px) {
     .contents-elements {

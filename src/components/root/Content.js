@@ -10,12 +10,17 @@ import apolloImgSrc from '../../img/apollo.png';
 import graphqlImgSrc from '../../img/graphql.png';
 import psqlImgSrc from '../../img/postgresql.png';
 
+import emailImgSrc from '../../img/email.png';
+import phoneImgSrc from '../../img/phone.png';
+import githubImgSrc from '../../img/github.png';
+
 class About extends React.Component {
     render() {
         return (
             <div className="contents-elements" id="contents-about">
                 <h3>Welcome!</h3>
                 <p>
+                    
                 </p>
             </div>
         );
@@ -151,11 +156,34 @@ class Course extends React.Component {
 
 class Contact extends React.Component {
     render() {
+        const phoneImg = <img
+            src={phoneImgSrc}
+            height='27'
+            width='27'
+            alt=""
+            id="contents-contact-img"
+        />;
+        const emailImg = <img
+            src={emailImgSrc}
+            height='27'
+            width='27'
+            alt=""
+            id="contents-contact-img"
+        />;
+        const githubImg = <img
+            src={githubImgSrc}
+            height='27'
+            width='27'
+            alt=""
+            id="contents-contact-img"
+        />;
         return (
             <div className="contents-elements" id="contents-contact">
-                <div>
-                    email<br />
-                    phone
+                <h3>Contact Me!</h3>
+                <div className="contents-contact-sur-img-div">
+                    <div>{phoneImg}<span>010-5112-8199</span></div>
+                    <div>{emailImg}<span>minkim918@gmail.com</span></div>
+                    <div>{githubImg}<span>https://github.com/fernok</span></div>
                 </div>
             </div>
         );
