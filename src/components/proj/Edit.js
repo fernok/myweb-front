@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+// import ReactMarkdown from 'react-markdown';
+import ReactMarkdownWithHtml from 'react-markdown/with-html';
 import { Redirect } from 'react-router-dom';
 
 import { Prism as SyntaxHighLighter } from 'react-syntax-highlighter';
@@ -32,13 +33,22 @@ class EditingWindow extends React.Component {
         return (
             <div className="proj-edit-sur">
             <textarea className="proj-edit-textarea" value={this.props.defaultContents} onChange={(e) => this.handleChange(e)}></textarea>
-            <ReactMarkdown 
+            {/* <ReactMarkdown 
                 className="proj-edit-markdown" 
                 children={this.state.input}
                 renderers={{
                     code:Component,
                 }}
                 plugins={[gfm]}
+            /> */}
+            <ReactMarkdownWithHtml
+                className="proj-edit-markdown"
+                children={this.state.input}
+                renderers={{
+                    code:Component,
+                }}
+                plugins={[gfm]}
+                allowDangerousHtml
             />
         </div>
         )

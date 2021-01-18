@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-
+import axios from 'axios';
+import ReactMarkdownWithHtml from 'react-markdown/with-html';
 import { Prism as SyntaxHighLighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import gfm from 'remark-gfm';
@@ -16,15 +16,56 @@ const Component = ({ value, language }) => {
 }
 
 class MarkDownWindow extends React.Component {
+    componentDidUpdate() {
+        // console.log(event.target.files[0]);
+        const documentId = this.props.id;
+        document.querySelector("input").onchange = async function (e) {
+            const file = e.target.files[0];
+
+            if (FileReader && file) {
+                var fr = new FileReader();
+                fr.onload = function() {
+                    document.getElementById('bar').src = fr.result;
+                    document.getElementById('bar').width = 100;
+                }
+                fr.readAsDataURL(file);
+            }
+
+            const targetUrl = '/proj/demo/' + documentId.toString();
+            // const targetUrl = '/proj/demo';
+
+            const fd = new FormData();
+            fd.append('file', file);
+            
+            const res = await axios.post(targetUrl, fd, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            });
+
+            const { fileName, filePath } = res.data;
+
+            console.log(fileName, filePath);
+        }
+    }
+
     render() {
         return (
             <>
-                <ReactMarkdown
+                {/* <ReactMarkdown
                     children={this.props.contents}
                     renderers={{
                         code:Component,
                     }}
                     plugins={[gfm]}
+                /> */}
+                <ReactMarkdownWithHtml
+                    children={this.props.contents}
+                    renderers={{
+                        code:Component,
+                    }}
+                    plugins={[gfm]}
+                    allowDangerousHtml
                 />
             </>
         )
@@ -50,8 +91,6 @@ class DocumentBody extends React.Component {
     
         const data = await response.json();
 
-        console.log(data);
-
         this.setState({
             contents: data.contents
         });
@@ -67,7 +106,7 @@ class DocumentBody extends React.Component {
         return (
             <>
                 {/* {this.state.contents} */}
-                <MarkDownWindow contents={this.state.contents} />
+                <MarkDownWindow id={this.props.id} contents={this.state.contents} />
             </>
         )
     }
